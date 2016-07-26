@@ -12,4 +12,8 @@ Refactoring a retired treehouse course project with Android API 24 &amp; [back{4
 - camera button in the tool bar that loads the camera from anywhere
 - a screen to allow users to register into app
 
+### Change:
+- replaces action bar with toolbar (planned)
+- replaces parseAnalytics.trackApp with parseAnalytics trackAppOpenedInBackground
+
 [back{4}app]:<https://www.back4app.com/>

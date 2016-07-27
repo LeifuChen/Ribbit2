@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="io.leifu.ribbit2.EditFriendsActivity">
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@android:id/list"
-        android:layout_alignParentTop="true"
-        />
+        android:layout_alignParentTop="true"/>
 
     <TextView
         android:id="@android:id/empty"
@@ -17,6 +19,6 @@
         android:gravity="center"
         android:layout_centerVertical="true"
         android:textColor="@color/purple"
-        android:text="@string/empty_inbox_label"/>
+        android:text="@string/empty_friends_label"/>
 
 </RelativeLayout>

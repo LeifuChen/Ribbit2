@@ -1,8 +1,11 @@
 package io.leifu.ribbit2;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -55,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        Drawable drawable = menu.getItem(2).getIcon();
+        if (drawable != null) {
+            drawable.mutate();
+            drawable.setColorFilter(ContextCompat.getColor(this, R.color.purple), PorterDuff.Mode.SRC_ATOP);
+        }
         return true;
     }
 
@@ -65,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_logout:
                 ParseUser.logOut();
                 navigateToLogin();
+                return true;
+            case R.id.action_edit_friends:
+                Intent intent = new Intent(this, EditFriendsActivity.class);
+                startActivity(intent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

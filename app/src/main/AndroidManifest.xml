@@ -31,6 +31,12 @@
             android:parentActivityName=".LoginActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".EditFriendsActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ActionBar">
+        </activity>
     </application>
 
 </manifest>

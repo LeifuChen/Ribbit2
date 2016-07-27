@@ -16,4 +16,6 @@
     <string name="title_section2">Friends</string>
     <string name="empty_friends_label">Add friends to begin!</string>
     <string name="empty_inbox_label">No new messages!</string>
+    <string name="error_title">We\\\'re sorry!</string>
+    <string name="menu_camera_label">Camera</string>
 </resources>

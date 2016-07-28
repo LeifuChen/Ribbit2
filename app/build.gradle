@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'
     compile 'com.parse:parse-android:1.13.1'
+    compile 'commons-io:commons-io:2.4'
 }

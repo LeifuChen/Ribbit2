@@ -48,6 +48,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ActionBar">
         </activity>
+        <activity
+            android:name=".ViewImageActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ActionBar">
+        </activity>
     </application>
 
 </manifest>

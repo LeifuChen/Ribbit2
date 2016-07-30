@@ -2,6 +2,12 @@
 <resources>
     <color name="purple">@android:color/holo_purple</color>
     <color name="black">@android:color/black</color>
-    <color name="white">@android:color/white</color>
     <color name="gray">#90ffffff</color>
+    <color name="white">@android:color/white</color>
+    <color name="light_gray">#bbbbbb</color>
+    <color name="apptheme_color">#9933cc</color>
+    <color name="light_purple_button">#e1d2f3</color>
+    <color name="pressed_purple_button">#ba9dda</color>
+    <color name="focused_purple_button">#ba9dda</color>
+    <color name="text_color">#250054</color>
 </resources>

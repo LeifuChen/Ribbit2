@@ -21,6 +21,7 @@ public class ViewImageActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_image);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_launcher);
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         Picasso.with(this).load(getIntent().getData().toString()).into(imageView);

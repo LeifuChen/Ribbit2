@@ -2,14 +2,11 @@ package io.leifu.ribbit2;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -197,7 +194,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setLogo(R.drawable.ic_launcher);
         setSupportActionBar(toolbar);
+
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
 
@@ -219,11 +218,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        Drawable drawable = menu.getItem(2).getIcon();
-        if (drawable != null) {
-            drawable.mutate();
-            drawable.setColorFilter(ContextCompat.getColor(this, R.color.purple), PorterDuff.Mode.SRC_ATOP);
-        }
         return true;
     }
 

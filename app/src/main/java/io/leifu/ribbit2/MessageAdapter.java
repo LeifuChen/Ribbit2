@@ -1,7 +1,6 @@
 package io.leifu.ribbit2;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +41,6 @@ public class MessageAdapter extends ArrayAdapter<ParseObject>{
         } else {
             holder.iconImageView.setImageResource(R.drawable.ic_action_play_over_video);
         }
-        holder.iconImageView.setColorFilter(R.color.purple, PorterDuff.Mode.SRC_ATOP);
         holder.nameLabel.setText(message.getString(ParseConstants.KEY_SENDER_NAME));
         holder.nameLabel.setTextColor(ContextCompat.getColor(mContext, R.color.purple));
         return convertView;

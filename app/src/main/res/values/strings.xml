@@ -2,8 +2,8 @@
     <string name="app_name">Ribbit2</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
-    <string name="login_button_label">Login</string>
-    <string name="sign_up_text">Sign Up!</string>
+    <string name="login_button_label">Sign In</string>
+    <string name="sign_up_text">Don\'t have an account? Sign Up!</string>
     <string name="email_hint">Email address</string>
     <string name="sign_up_button_label">Sign Up</string>
     <string name="signup_error_message">Please make sure you enter a username, password and email address!</string>
@@ -36,4 +36,8 @@
     <string name="success_message">Message sent!</string>
     <string name="error_sending_message">There was an error sending your message. Please try again.</string>
     <string name="message_icon_label">message icon</string>
+    <string name="ribbit_frog_background_image">Ribbit frog Background Image</string>
+    <string name="subtitle">A Treehouse Project</string>
+    <string name="cancel_button_label">Cancel</string>
+    <string name="content_desc_button_divider">Button divider</string>
 </resources>

@@ -3,12 +3,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 xmlns:tools="http://schemas.android.com/tools"
-                tools:context=".ViewImageActivity">
-<ImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                tools:context=".ui.ViewImageActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+    </android.support.design.widget.AppBarLayout>
+
+    <ImageView
     android:id="@+id/imageView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentTop = "true"
+    android:layout_below="@+id/appbar"
     android:scaleType="fitCenter"/>
 </RelativeLayout>

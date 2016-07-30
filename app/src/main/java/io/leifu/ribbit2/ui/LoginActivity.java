@@ -1,4 +1,4 @@
-package io.leifu.ribbit2;
+package io.leifu.ribbit2.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+
+import io.leifu.ribbit2.utils.AlertDialogHelper;
+import io.leifu.ribbit2.R;
 
 public class LoginActivity extends AppCompatActivity {
 

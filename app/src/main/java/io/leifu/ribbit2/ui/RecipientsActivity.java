@@ -1,4 +1,4 @@
-package io.leifu.ribbit2;
+package io.leifu.ribbit2.ui;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +30,11 @@ import com.parse.SaveCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.leifu.ribbit2.utils.AlertDialogHelper;
+import io.leifu.ribbit2.utils.FileHelper;
+import io.leifu.ribbit2.utils.ParseConstants;
+import io.leifu.ribbit2.R;
+
 public class RecipientsActivity extends AppCompatActivity {
 
     public static final String TAG = RecipientsActivity.class.getSimpleName();
@@ -47,15 +53,20 @@ public class RecipientsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipents);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setLogo(R.drawable.ic_launcher);
+        toolbar.setOverflowIcon(getDrawable(R.drawable.ic_menu_overflow));
+        setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.ic_launcher);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mListView = (ListView) findViewById(android.R.id.list);
         mEmptyView = (TextView) findViewById(android.R.id.empty);
         mListView.setEmptyView(mEmptyView);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         mMediaUri = getIntent().getData();
-        mFileType =getIntent().getExtras().getString(ParseConstants.KEY_FILE_TYPE);
+        mFileType = getIntent().getExtras().getString(ParseConstants.KEY_FILE_TYPE);
     }
 
     @Override
@@ -195,7 +206,7 @@ public class RecipientsActivity extends AppCompatActivity {
 
     private ArrayList<String> getRecipientIds() {
         ArrayList<String> recipientIds = new ArrayList<>();
-        for (int i= 0; i< mListView.getCount(); i++) {
+        for (int i = 0; i < mListView.getCount(); i++) {
             recipientIds.add(mFriends.get(i).getObjectId());
         }
         return recipientIds;

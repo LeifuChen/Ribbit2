@@ -1,4 +1,4 @@
-package io.leifu.ribbit2;
+package io.leifu.ribbit2.adapters;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -12,6 +12,9 @@ import android.widget.TextView;
 import com.parse.ParseObject;
 
 import java.util.List;
+
+import io.leifu.ribbit2.utils.ParseConstants;
+import io.leifu.ribbit2.R;
 
 public class MessageAdapter extends ArrayAdapter<ParseObject>{
     protected Context mContext;
@@ -37,9 +40,9 @@ public class MessageAdapter extends ArrayAdapter<ParseObject>{
         ParseObject message = mMessages.get(position);
 
         if (message.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_IMAGE)) {
-            holder.iconImageView.setImageResource(R.drawable.ic_action_picture);
+            holder.iconImageView.setImageResource(R.drawable.ic_picture);
         } else {
-            holder.iconImageView.setImageResource(R.drawable.ic_action_play_over_video);
+            holder.iconImageView.setImageResource(R.drawable.ic_video);
         }
         holder.nameLabel.setText(message.getString(ParseConstants.KEY_SENDER_NAME));
         holder.nameLabel.setTextColor(ContextCompat.getColor(mContext, R.color.purple));

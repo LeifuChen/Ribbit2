@@ -1,4 +1,4 @@
-package io.leifu.ribbit2;
+package io.leifu.ribbit2.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +25,11 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import io.leifu.ribbit2.utils.AlertDialogHelper;
+import io.leifu.ribbit2.utils.ParseConstants;
+import io.leifu.ribbit2.R;
+import io.leifu.ribbit2.adapters.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -195,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(R.drawable.ic_launcher);
+        toolbar.setOverflowIcon(getDrawable(R.drawable.ic_menu_overflow));
         setSupportActionBar(toolbar);
 
 

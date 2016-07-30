@@ -1,10 +1,11 @@
-package io.leifu.ribbit2;
+package io.leifu.ribbit2.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -15,13 +16,20 @@ import com.squareup.picasso.Picasso;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import io.leifu.ribbit2.R;
+
 public class ViewImageActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_image);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setLogo(R.drawable.ic_launcher);
+        toolbar.setOverflowIcon(getDrawable(R.drawable.ic_menu_overflow));
+        setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.ic_launcher);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         Picasso.with(this).load(getIntent().getData().toString()).into(imageView);

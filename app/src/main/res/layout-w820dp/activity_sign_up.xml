@@ -5,7 +5,7 @@
     style="@style/AuthBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.leifu.ribbit2.SignUpActivity">
+    tools:context=".ui.SignUpActivity">
 
     <ImageView
         android:id="@+id/background"

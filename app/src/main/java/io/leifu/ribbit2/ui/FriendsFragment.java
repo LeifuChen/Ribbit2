@@ -1,4 +1,4 @@
-package io.leifu.ribbit2;
+package io.leifu.ribbit2.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -17,6 +17,10 @@ import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 import java.util.List;
+
+import io.leifu.ribbit2.utils.AlertDialogHelper;
+import io.leifu.ribbit2.utils.ParseConstants;
+import io.leifu.ribbit2.R;
 
 public class FriendsFragment extends ListFragment {
 

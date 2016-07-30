@@ -3,8 +3,6 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
-        <item name="android:editTextStyle">@style/EditTextAppTheme</item>
-        <item name="android:checkboxStyle">@style/CheckBoxAppTheme</item>
     </style>
 
     <style name="AuthBackground">
@@ -61,25 +59,22 @@
         <item name="android:textColor">@color/text_color</item>
     </style>
 
-
-    <style name="AppThemeNoUse" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/purple</item>
-        <item name="colorPrimaryDark">@color/black</item>
-        <item name="colorAccent">@color/purple</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:colorButtonNormal">@color/purple</item>
-        <item name="android:textColorPrimary">@color/black</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.CustomActionBar" parent="AppTheme">
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/black</item>
         <item name="colorAccent">@color/purple</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:textColor">@color/purple</item>
+        <item name="android:colorControlActivated">@color/purple</item>
+        <item name="android:listViewStyle">@style/AppTheme.LightPurpleBackground</item>
+        <item name="android:gridViewStyle">@style/AppTheme.LightPurpleBackground</item>
     </style>
 
+    <style name="AppTheme.LightPurpleBackground">
+        <item name="android:background">@color/light_purple_background</item>
+        <item name="android:divider">@null</item>
+    </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:colorBackground">@color/white</item>
         <item name="android:textColorPrimary">@color/purple</item>
@@ -88,29 +83,6 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorBackground">@color/white</item>
         <item name="android:textColor">@color/purple</item>
-    </style>
-
-    <style name="AppTheme.ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/purple</item>
-        <item name="colorPrimaryDark">@color/black</item>
-        <item name="android:textColor">@color/purple</item>
-        <item name="android:colorControlActivated">@color/purple</item>
-    </style>
-
-    <style name="EditTextAppTheme" parent="android:Widget.EditText">
-        <item name="android:background">@drawable/apptheme_edit_text_holo_light</item>
-        <item name="android:textColor">#000000</item>
-    </style>
-
-    <style name="CheckBoxAppTheme" parent="android:Widget.CompoundButton.CheckBox">
-        <item name="android:button">@drawable/apptheme_btn_check_holo_light</item>
-    </style>
-
-    <style name="ButtonAppTheme" parent="android:Widget.Button">
-        <item name="android:background">@drawable/apptheme_btn_default_holo_light</item>
-        <item name="android:minHeight">48dip</item>
-        <item name="android:minWidth">64dip</item>
-        <item name="android:textColor">#000000</item>
     </style>
 
 </resources>

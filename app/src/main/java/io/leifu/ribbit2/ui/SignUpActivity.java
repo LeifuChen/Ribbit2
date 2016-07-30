@@ -1,4 +1,4 @@
-package io.leifu.ribbit2;
+package io.leifu.ribbit2.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.widget.EditText;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import io.leifu.ribbit2.utils.AlertDialogHelper;
+import io.leifu.ribbit2.R;
 
 public class SignUpActivity extends AppCompatActivity {
 

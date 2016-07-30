@@ -1,4 +1,4 @@
-package io.leifu.ribbit2;
+package io.leifu.ribbit2.ui;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -19,6 +19,11 @@ import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.leifu.ribbit2.utils.AlertDialogHelper;
+import io.leifu.ribbit2.utils.ParseConstants;
+import io.leifu.ribbit2.R;
+import io.leifu.ribbit2.adapters.MessageAdapter;
 
 public class InboxFragment extends ListFragment {
 

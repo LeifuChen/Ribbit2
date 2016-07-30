@@ -11,16 +11,16 @@
         android:required="true"/>
 
     <application
-        android:name=".RibbitApplication"
+        android:name=".utils.RibbitApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.CustomActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -28,31 +28,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".SignUpActivity"
-            android:parentActivityName=".LoginActivity"
+            android:name=".ui.SignUpActivity"
+            android:parentActivityName=".ui.LoginActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".EditFriendsActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".ui.EditFriendsActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.ActionBar">
+            android:theme="@style/AppTheme.CustomActionBar">
         </activity>
         <activity
-            android:name=".RecipientsActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".ui.RecipientsActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.ActionBar">
+            android:theme="@style/AppTheme.CustomActionBar">
         </activity>
         <activity
-            android:name=".ViewImageActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".ui.ViewImageActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.ActionBar">
+            android:theme="@style/AppTheme.CustomActionBar">
         </activity>
     </application>
 

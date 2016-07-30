@@ -1,4 +1,4 @@
-package io.leifu.ribbit2;
+package io.leifu.ribbit2.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

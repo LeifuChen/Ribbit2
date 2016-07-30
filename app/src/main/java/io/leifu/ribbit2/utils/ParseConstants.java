@@ -1,4 +1,4 @@
-package io.leifu.ribbit2;
+package io.leifu.ribbit2.utils;
 
 public final class ParseConstants {
     // Class name

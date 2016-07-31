@@ -18,4 +18,4 @@ Refactoring a retired treehouse course project with Android API 24 &amp; [back{4
 - replaces parseAnalytics.trackApp with parseAnalytics trackAppOpenedInBackground
 
 [back{4}app]:<https://www.back4app.com/>
-[mockup];<http://treehouse-code-samples.s3.amazonaws.com/Android/ribbit-android-overview.png>
+[mockup]:<http://treehouse-code-samples.s3.amazonaws.com/Android/ribbit-android-overview.png>

@@ -3,11 +3,19 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <ListView
+    <GridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@android:id/list"
-        style="@style/AppTheme.LightPurpleBackground"/>
+        android:id="@+id/friendsGrid"
+        style="@style/AppTheme.LightPurpleBackground.GridView"
+        android:clipToPadding="false"
+        android:numColumns="auto_fit"
+        android:columnWidth="90dp"
+        android:stretchMode="columnWidth"
+        android:horizontalSpacing="@dimen/user_grid_spacing"
+        android:verticalSpacing="@dimen/user_grid_spacing"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:id="@android:id/empty"

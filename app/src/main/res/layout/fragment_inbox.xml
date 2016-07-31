@@ -3,14 +3,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@android:id/list"
         style="@style/AppTheme.LightPurpleBackground"
-        android:paddingBottom="@dimen/inbox_vertical_margin"
-        android:clipToPadding="false"/>
-
+        android:paddingBottom="@dimen/inbox_vertical_margin"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
     <TextView
         android:id="@android:id/empty"
         android:layout_width="match_parent"

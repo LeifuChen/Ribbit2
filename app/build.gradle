@@ -8,8 +8,9 @@ android {
         applicationId "io.leifu.ribbit2"
         minSdkVersion 21
         targetSdkVersion 24
-        versionCode 1
+        versionCode 2
         versionName "1.0"
+        manifestPlaceholders = [HOCKEYAPP_APP_ID: "d40e81a7312e4676b5431682a74ee08f"]
     }
     buildTypes {
         release {
@@ -27,4 +28,5 @@ dependencies {
     compile 'com.parse:parse-android:1.13.1'
     compile 'commons-io:commons-io:2.4'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'net.hockeyapp.android:HockeySDK:4.0.1'
 }

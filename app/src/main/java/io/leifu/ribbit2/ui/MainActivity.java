@@ -18,6 +18,9 @@ import android.widget.Toast;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 
+import net.hockeyapp.android.CrashManager;
+import net.hockeyapp.android.UpdateManager;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,10 +29,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import io.leifu.ribbit2.utils.AlertDialogHelper;
-import io.leifu.ribbit2.utils.ParseConstants;
 import io.leifu.ribbit2.R;
 import io.leifu.ribbit2.adapters.SectionsPagerAdapter;
+import io.leifu.ribbit2.utils.AlertDialogHelper;
+import io.leifu.ribbit2.utils.ParseConstants;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -212,6 +215,8 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+        checkForUpdates();
     }
 
     private void navigateToLogin() {
@@ -244,5 +249,36 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkForCrashes();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterManagers();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterManagers();
+    }
+
+    private void checkForCrashes() {
+        CrashManager.register(this);
+    }
+
+    private void checkForUpdates() {
+        // Remove this for store builds!
+        UpdateManager.register(this);
+    }
+
+    private void unregisterManagers() {
+        UpdateManager.unregister();
     }
 }

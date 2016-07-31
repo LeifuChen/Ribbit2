@@ -54,6 +54,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CustomActionBar">
         </activity>
+        <meta-data android:name="net.hockeyapp.android.appIdentifier" android:value="${HOCKEYAPP_APP_ID}" />
     </application>
 
 </manifest>

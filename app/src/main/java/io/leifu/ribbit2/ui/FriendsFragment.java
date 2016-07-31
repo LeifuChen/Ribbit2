@@ -1,13 +1,12 @@
 package io.leifu.ribbit2.ui;
 
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -18,22 +17,28 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
+import io.leifu.ribbit2.R;
+import io.leifu.ribbit2.adapters.UserAdapter;
 import io.leifu.ribbit2.utils.AlertDialogHelper;
 import io.leifu.ribbit2.utils.ParseConstants;
-import io.leifu.ribbit2.R;
 
-public class FriendsFragment extends ListFragment {
+public class FriendsFragment extends Fragment {
 
     public static final String TAG = FriendsFragment.class.getSimpleName();
 
     protected List<ParseUser> mFriends;
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
+    protected GridView mGridView;
+    protected TextView mEmptyView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_friends, container, false);
+        View rootView = inflater.inflate(R.layout.user_grid, container, false);
+        mGridView = (GridView) rootView.findViewById(R.id.friendsGrid);
+        mEmptyView = (TextView) rootView.findViewById(android.R.id.empty);
+        mGridView.setEmptyView(mEmptyView);
         return rootView;
     }
 
@@ -57,21 +62,15 @@ public class FriendsFragment extends ListFragment {
                         usernames[i] = user.getUsername();
                         i++;
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                           getListView().getContext(),
-                            android.R.layout.simple_list_item_1,
-                            usernames) {
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent) {
-                            TextView textView = (TextView) super.getView(position, convertView, parent);
-                            textView.setTextColor(ContextCompat.getColor(getListView().getContext(), R.color.purple));
-                            return textView;
-                        }
-                    };
-                    setListAdapter(adapter);
+                    if (mGridView.getAdapter() == null) {
+                        UserAdapter adapter = new UserAdapter(getActivity(), mFriends);
+                        mGridView.setAdapter(adapter);
+                    } else {
+                        ((UserAdapter) mGridView.getAdapter()).refill(mFriends);
+                    }
                 } else {
                     Log.e(TAG, e.getMessage());
-                    AlertDialogHelper.builder(getListView().getContext(),
+                    AlertDialogHelper.builder(getActivity(),
                             e.getMessage(),
                             getString(R.string.error_title));
                 }

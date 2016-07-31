@@ -14,6 +14,7 @@ import com.parse.ParseUser;
 
 import io.leifu.ribbit2.utils.AlertDialogHelper;
 import io.leifu.ribbit2.R;
+import io.leifu.ribbit2.utils.RibbitApplication;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -59,6 +60,8 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void done(ParseUser user, ParseException e) {
                                     if (user != null) {
+                                        RibbitApplication.updateParseInstallation(user);
+
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // prevent the user back to sign up screen
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

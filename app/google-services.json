@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "944343580222",
+    "project_id": "ribbit2-1469989008312"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944343580222:android:2db829f7e574c61b",
+        "android_client_info": {
+          "package_name": "io.leifu.ribbit2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC956-p98Z1ZamD6jyVQ7uhflkCAnP5m4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

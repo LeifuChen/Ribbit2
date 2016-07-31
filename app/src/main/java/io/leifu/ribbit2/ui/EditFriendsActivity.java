@@ -10,7 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,9 +24,10 @@ import com.parse.SaveCallback;
 
 import java.util.List;
 
+import io.leifu.ribbit2.R;
+import io.leifu.ribbit2.adapters.UserAdapter;
 import io.leifu.ribbit2.utils.AlertDialogHelper;
 import io.leifu.ribbit2.utils.ParseConstants;
-import io.leifu.ribbit2.R;
 
 public class EditFriendsActivity extends AppCompatActivity {
 
@@ -34,27 +36,26 @@ public class EditFriendsActivity extends AppCompatActivity {
     protected List<ParseUser> mUsers;
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
-
-    private ListView mListView;
+    protected GridView mGridView;
     private TextView mEmptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_friends);
+        setContentView(R.layout.activity_grid_friends);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setLogo(R.drawable.ic_launcher);
         toolbar.setOverflowIcon(getDrawable(R.drawable.ic_menu_overflow));
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle(R.string.menu_edit_friends_label);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        mListView = (ListView) findViewById(android.R.id.list);
+        mGridView = (GridView) findViewById(R.id.friendsGrid);
         mEmptyView = (TextView) findViewById(android.R.id.empty);
-        mListView.setEmptyView(mEmptyView);
-        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        mGridView.setEmptyView(mEmptyView);
+        mGridView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
     }
 
     @Override
@@ -78,19 +79,23 @@ public class EditFriendsActivity extends AppCompatActivity {
                         usernames[i] = user.getUsername();
                         i++;
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                            EditFriendsActivity.this,
-                            android.R.layout.simple_list_item_multiple_choice,
-                            usernames);
-                    mListView.setAdapter(adapter);
+                    if (mGridView.getAdapter() == null) {
+                        UserAdapter adapter = new UserAdapter(EditFriendsActivity.this, mUsers);
+                        mGridView.setAdapter(adapter);
+                    } else {
+                        ((UserAdapter) mGridView.getAdapter()).refill(mUsers);
+                    }
                     addFriendCheckmarks();
-                    mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                            if (mListView.isItemChecked(position)) {
+                            ImageView checkImageView = (ImageView) view.findViewById(R.id.checkImageView);
+                            if (mGridView.isItemChecked(position)) {
                                 mFriendsRelation.add(mUsers.get(position));
+                                checkImageView.setVisibility(View.VISIBLE);
                             } else {
                                 mFriendsRelation.remove(mUsers.get(position));
+                                checkImageView.setVisibility(View.INVISIBLE);
                             }
                             mCurrentUser.saveInBackground(new SaveCallback() {
                                 @Override
@@ -121,7 +126,7 @@ public class EditFriendsActivity extends AppCompatActivity {
                         ParseUser user = mUsers.get(i);
                         for (ParseUser friend : friends) {
                             if (friend.getObjectId().equals(user.getObjectId())) {
-                                mListView.setItemChecked(i, true);
+                                mGridView.setItemChecked(i, true);
                             }
                         }
                     }

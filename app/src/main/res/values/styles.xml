@@ -59,6 +59,11 @@
         <item name="android:textColor">@color/text_color</item>
     </style>
 
+    <style name="GridImage">
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
     <style name="AppTheme.CustomActionBar" parent="AppTheme">
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/black</item>

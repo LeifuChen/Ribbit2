@@ -5,10 +5,21 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <uses-feature
         android:name="android.hardware.camera2"
         android:required="true"/>
+
+    <permission
+        android:name="io.leifu.ribbit2.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="io.leifu.ribbit2.permission.C2D_MESSAGE" />
 
     <application
         android:name=".utils.RibbitApplication"
@@ -54,7 +65,52 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CustomActionBar">
         </activity>
-        <meta-data android:name="net.hockeyapp.android.appIdentifier" android:value="${HOCKEYAPP_APP_ID}" />
+
+        <meta-data
+            android:name="net.hockeyapp.android.appIdentifier"
+            android:value="${HOCKEYAPP_APP_ID}"/>
+
+
+        <!-- Parse setup -->
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="FCyHs3R5YRGaWnu4rtExGmyKT9RNqxJ1RQnwN5kR" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="B7SP5lcXesRNoSPbtV2CBeaQkQoP9D9A4UirgYD2" />
+        <!-- GCM setup -->
+        <meta-data
+            android:name="com.parse.push.gcm_sender_id"
+            android:value="id:944343580222" />
+
+        <meta-data android:name="com.parse.push.notification_icon"
+                   android:resource="@drawable/ic_stat_ic_launcher"/>
+
+        <service android:name="com.parse.PushService"/>
+        <receiver android:name="com.parse.ParsePushBroadcastReceiver"
+                  android:exported="false">
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+                <category android:name="io.leifu.ribbit2"/>
+            </intent-filter>
+        </receiver>
+        <service
+            android:name=".utils.RegistrationIntentService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

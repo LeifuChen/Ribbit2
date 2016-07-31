@@ -4,36 +4,41 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.FunctionCallback;
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import io.leifu.ribbit2.R;
+import io.leifu.ribbit2.adapters.UserAdapter;
 import io.leifu.ribbit2.utils.AlertDialogHelper;
 import io.leifu.ribbit2.utils.FileHelper;
 import io.leifu.ribbit2.utils.ParseConstants;
-import io.leifu.ribbit2.R;
 
 public class RecipientsActivity extends AppCompatActivity {
 
@@ -46,25 +51,24 @@ public class RecipientsActivity extends AppCompatActivity {
     protected Uri mMediaUri;
     protected String mFileType;
 
-    private ListView mListView;
+    private GridView mGridView;
     private TextView mEmptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipents);
+        setContentView(R.layout.activity_grid_friends);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setLogo(R.drawable.ic_launcher);
         toolbar.setOverflowIcon(getDrawable(R.drawable.ic_menu_overflow));
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mListView = (ListView) findViewById(android.R.id.list);
+        mGridView = (GridView) findViewById(R.id.friendsGrid);
         mEmptyView = (TextView) findViewById(android.R.id.empty);
-        mListView.setEmptyView(mEmptyView);
-        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        mGridView.setEmptyView(mEmptyView);
+        mGridView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         mMediaUri = getIntent().getData();
         mFileType = getIntent().getExtras().getString(ParseConstants.KEY_FILE_TYPE);
     }
@@ -89,25 +93,27 @@ public class RecipientsActivity extends AppCompatActivity {
                         usernames[i] = user.getUsername();
                         i++;
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                            mListView.getContext(),
-                            android.R.layout.simple_list_item_multiple_choice,
-                            usernames) {
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent) {
-                            TextView textView = (TextView) super.getView(position, convertView, parent);
-                            textView.setTextColor(ContextCompat.getColor(RecipientsActivity.this, R.color.purple));
-                            return textView;
-                        }
-                    };
-                    mListView.setAdapter(adapter);
-                    mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    if (mGridView.getAdapter() == null) {
+                        UserAdapter adapter = new UserAdapter(RecipientsActivity.this, mFriends);
+                        mGridView.setAdapter(adapter);
+                        mGridView.setAdapter(adapter);
+                    } else {
+                        ((UserAdapter) mGridView.getAdapter()).refill(mFriends);
+                    }
+                    mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                            if (mListView.getCheckedItemCount() > 0) {
+                            if (mGridView.getCheckedItemCount() > 0) {
                                 mSendMenuItem.setVisible(true);
                             } else {
                                 mSendMenuItem.setVisible(false);
+                            }
+
+                            ImageView checkImageView = (ImageView) view.findViewById(R.id.checkImageView);
+                            if (mGridView.isItemChecked(position)) {
+                                checkImageView.setVisibility(View.VISIBLE);
+                            } else {
+                                checkImageView.setVisibility(View.INVISIBLE);
                             }
                         }
                     });
@@ -162,6 +168,8 @@ public class RecipientsActivity extends AppCompatActivity {
                 if (e == null) {
                     // success!
                     Toast.makeText(RecipientsActivity.this, R.string.success_message, Toast.LENGTH_LONG).show();
+//                    sendPushNotifications();
+                    callCloudCode();
                 } else {
                     Log.e(TAG, e.getMessage());
                     AlertDialogHelper.builder(RecipientsActivity.this,
@@ -170,6 +178,19 @@ public class RecipientsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void sendPushNotifications() {
+        ParseQuery<ParseInstallation> query = ParseInstallation.getQuery();
+        query.whereContainedIn(ParseConstants.KEY_USER_ID, getRecipientIds());
+
+        // send push notification
+        ParsePush push = new ParsePush();
+        push.setQuery(query);
+        push.setMessage(getString(R.string.push_message,
+                ParseUser.getCurrentUser().getUsername()));
+        push.sendInBackground();
+
     }
 
     private void navigateToLogin() {
@@ -206,9 +227,36 @@ public class RecipientsActivity extends AppCompatActivity {
 
     private ArrayList<String> getRecipientIds() {
         ArrayList<String> recipientIds = new ArrayList<>();
-        for (int i = 0; i < mListView.getCount(); i++) {
-            recipientIds.add(mFriends.get(i).getObjectId());
+        for (int i = 0; i < mGridView.getCount(); i++) {
+            if (mGridView.isItemChecked(i)) {
+                recipientIds.add(mFriends.get(i).getObjectId());
+            }
         }
         return recipientIds;
+    }
+
+    private void callCloudCode() {
+        HashMap<String, Object> params = new HashMap<>();
+        HashMap<String, Object> where = new HashMap<>();
+        HashMap<String, Object> data = new HashMap<>();
+        for (int i=0; i < getRecipientIds().size(); i++) {
+            where.put("userId", getRecipientIds().get(i));
+            data.put("alert", getString(R.string.push_message,
+                    ParseUser.getCurrentUser().getUsername()));
+            params.put("where", where);
+            params.put("data", data);
+            params.put("useMasterKey", true);
+            ParseCloud.callFunctionInBackground("push", params, new FunctionCallback<String>() {
+                @Override
+                public void done(String object, ParseException e) {
+                    if (e == null) {
+                        // ratings is 4.5
+                        Log.i(TAG, "Successfully called cloud code: " + object);
+                    } else {
+                        Log.e(TAG, "Could not call cloud code: " + e.getMessage());
+                    }
+                }
+            });
+        }
     }
 }

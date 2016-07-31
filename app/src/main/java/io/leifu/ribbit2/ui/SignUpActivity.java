@@ -13,6 +13,7 @@ import com.parse.SignUpCallback;
 
 import io.leifu.ribbit2.utils.AlertDialogHelper;
 import io.leifu.ribbit2.R;
+import io.leifu.ribbit2.utils.RibbitApplication;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -60,6 +61,8 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void done(ParseException e) {
                             if (e == null) {
+                                RibbitApplication.updateParseInstallation(
+                                        ParseUser.getCurrentUser());
                                 // Success!
                                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // prevent the user back to sign up screen

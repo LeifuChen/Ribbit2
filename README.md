@@ -6,6 +6,7 @@ Refactoring a retired treehouse course project with Android API 24 &amp; [back{4
 - store the **friends** and video/photos
 - send message to the **cloud** to wait for our friends to view them
 - access to messages into an **inbox**
+- notify the user if there is a new message
 
 ### Design:
 - two tabs, inbox and friends
@@ -14,8 +15,12 @@ Refactoring a retired treehouse course project with Android API 24 &amp; [back{4
 - [mockup]
 
 ### Change:
-- replaces action bar with toolbar (planned)
-- replaces parseAnalytics.trackApp with parseAnalytics trackAppOpenedInBackground
+- replace action bar with toolbar 
+- replace parseAnalytics.trackApp with parseAnalytics trackAppOpenedInBackground
+- redesign toolbar layout
+- redesign tab layout
+- redesign message view layout
+- replace parse push notification with parse server cloud code 
 
 [back{4}app]:<https://www.back4app.com/>
 [mockup]:<http://treehouse-code-samples.s3.amazonaws.com/Android/ribbit-android-overview.png>

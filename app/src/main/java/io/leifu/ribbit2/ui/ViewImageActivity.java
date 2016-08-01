@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.parse.ParseUser;
@@ -19,17 +20,27 @@ import java.util.TimerTask;
 import io.leifu.ribbit2.R;
 
 public class ViewImageActivity extends AppCompatActivity{
+
+    protected ImageView mLeftArrow;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_image);
+        mLeftArrow = (ImageView) findViewById(R.id.leftArrow);
+        mLeftArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setLogo(R.drawable.ic_launcher);
+        toolbar.setTitle("");
         toolbar.setOverflowIcon(getDrawable(R.drawable.ic_menu_overflow));
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         Picasso.with(this).load(getIntent().getData().toString()).into(imageView);

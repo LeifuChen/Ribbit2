@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import io.leifu.ribbit2.ui.FriendsFragment;
 import io.leifu.ribbit2.ui.InboxFragment;
-import io.leifu.ribbit2.R;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter{
 
@@ -34,16 +33,17 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter{
         return 2;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return mContext.getString(R.string.title_section1);
-            case 1:
-                return mContext.getString(R.string.title_section2);
-        }
+//    @Override
+//    public CharSequence getPageTitle(int position) {
+//        switch (position) {
+//            case 0:
+//                return mContext.getString(R.string.title_section1);
+//            case 1:
+//                return mContext.getString(R.string.title_section2);
+//        }
+//
+//        return null;
+//    }
 
-        return null;
-    }
 
 }

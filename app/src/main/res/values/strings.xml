@@ -44,4 +44,6 @@
     <string name="content_desc_user_checkmark">Checkmark</string>
     <string name="push_message">You have a new Ribbit message from %s!</string>
     <string name="gcm_defaultSenderId">944343580222</string>
+    <string name="view_image_title">View Message</string>
+    <string name="choose_recipients_title">Choose Recipients</string>
 </resources>

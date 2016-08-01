@@ -53,6 +53,7 @@ public class RecipientsActivity extends AppCompatActivity {
 
     private GridView mGridView;
     private TextView mEmptyView;
+    protected ImageView mLeftArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,17 +61,25 @@ public class RecipientsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_grid_friends);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
         toolbar.setOverflowIcon(getDrawable(R.drawable.ic_menu_overflow));
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         mGridView = (GridView) findViewById(R.id.friendsGrid);
         mEmptyView = (TextView) findViewById(android.R.id.empty);
         mGridView.setEmptyView(mEmptyView);
         mGridView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         mMediaUri = getIntent().getData();
+        mLeftArrow = (ImageView) findViewById(R.id.leftArrow);
         mFileType = getIntent().getExtras().getString(ParseConstants.KEY_FILE_TYPE);
+        mLeftArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override

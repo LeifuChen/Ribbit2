@@ -202,7 +202,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setLogo(R.drawable.ic_launcher);
+//        toolbar.setLogo(R.drawable.ic_launcher);
+        toolbar.setTitle("");
         toolbar.setOverflowIcon(getDrawable(R.drawable.ic_menu_overflow));
         setSupportActionBar(toolbar);
 
@@ -213,8 +214,15 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+        TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.getTabAt(1).setIcon(R.drawable.ic_tab_friends);
+        mTabLayout.getTabAt(0).setIcon(R.drawable.ic_tab_inbox);
+
+        for (int i = 0; i < mTabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = mTabLayout.getTabAt(i);
+            if (tab != null) tab.setCustomView(R.layout.custom_tab);
+        }
 
         checkForUpdates();
     }

@@ -38,24 +38,31 @@ public class EditFriendsActivity extends AppCompatActivity {
     protected ParseUser mCurrentUser;
     protected GridView mGridView;
     private TextView mEmptyView;
+    protected ImageView mLeftArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid_friends);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setOverflowIcon(getDrawable(R.drawable.ic_menu_overflow));
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle(R.string.menu_edit_friends_label);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
+        mLeftArrow = (ImageView) findViewById(R.id.leftArrow);
         mGridView = (GridView) findViewById(R.id.friendsGrid);
         mEmptyView = (TextView) findViewById(android.R.id.empty);
         mGridView.setEmptyView(mEmptyView);
         mGridView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        toolbar.setOverflowIcon(getDrawable(R.drawable.ic_menu_overflow));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        mLeftArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
